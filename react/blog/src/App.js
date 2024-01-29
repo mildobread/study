@@ -9,6 +9,7 @@ function App() {
   let [글제목, 글제목변경] = useState(['남자 코트 추천', '강남 우동맛집', '파이썬 독학']); // Destructuring
   let [따봉들, 따봉들변경] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
+  let [title, setTitle] = useState(0);
 
   function 함수() {
     let copy = [...글제목];
@@ -28,6 +29,11 @@ function App() {
     따봉들변경(copy)
   }
 
+  function 모달변경(i) {
+    setTitle(i)
+    setModal(true)
+  }
+
   return (
     <div className="App">
       <div className="black-nav">
@@ -39,7 +45,8 @@ function App() {
         글제목.map(function(a, i){
           return (
             <div className='list' key={i}>
-              <h4>{a}
+              <h4>
+                <span onClick={()=>모달변경(i)}>{a}</span>
                 <span onClick={()=>따봉변경(i)}> 👍</span>{따봉들[i]}
               </h4>
               <p>2월 17일 발행</p>
@@ -48,19 +55,20 @@ function App() {
         })
       }
       {
-        modal == true ? <Modal></Modal> : null
+        modal == true ? <Modal 글제목={글제목[title]}></Modal> : null
       }
     </div>
   );
 }
 
-function Modal() { // Component
+function Modal(props) { // Component
   return (
     <>
       <div className='modal'>
-        <h4>제목</h4>
+        <h4>{props.글제목}</h4>
         <p>날짜</p>
         <p>상세내용</p>
+        <button>글수정</button>
       </div>
     </>
   )
