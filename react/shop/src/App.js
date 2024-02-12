@@ -1,9 +1,15 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { useState } from 'react';
+import { Container, Nav, Navbar, NavDropdown, Row, Col } from 'react-bootstrap';
+import data from './data.js';
+import Comp from './component.js';
 
 
 function App() {
+
+  let [shoes] = useState(data)
+
   return (
     <div className="App">
       <Navbar expand="lg" className="navbar">
@@ -29,6 +35,18 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <div className="main-bg"></div>
+      <Container>
+        <Row>
+          {
+            shoes.map(function(a, i){
+              return (
+                <Comp index={i}></Comp>
+              )
+            })
+          }
+        </Row>
+      </Container>
     </div>
   );
 }
