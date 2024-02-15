@@ -1,4 +1,4 @@
-import { Col } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 
 function Comp(props) { // Component
     return (

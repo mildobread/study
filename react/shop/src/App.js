@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
 import data from './data.js';
 import Comp from './component.js';
+import Detail from './detail.js';
+import { Routes, Route, Link } from 'react-router-dom'
 
 
 function App() {
@@ -18,8 +20,8 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/detail">Detail</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -35,18 +37,37 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="main-bg"></div>
-      <Container>
-        <Row>
-          {
-            shoes.map((element, i)=>{
-              return (
-                <Comp shoes={shoes[i]} index={i}></Comp>
-              )
-            })
-          }
-        </Row>
-      </Container>
+
+      <Routes>
+        <Route path="/" element={
+          <>
+          <div className="main-bg"></div>
+          <Container>
+            <Row>
+              { shoes.map((a, i)=>{
+                return <Comp shoes={shoes[i]} index={i}></Comp>
+              })}
+            </Row>
+          </Container>
+          </>
+        }/>
+
+        <Route path="/detail" element={
+          <>
+          <div className="detail-bg"></div>
+          <Container>
+            <Row>
+              { shoes.map((a, i)=>{
+                return <Detail shoes={shoes[i]} index={i}></Detail>
+              })}
+            </Row>
+          </Container>
+          </>
+        }/>
+
+        <Route path="/about" element={<div>어바웃페이지임</div>}/>
+      </Routes>
+
     </div>
   );
 }
