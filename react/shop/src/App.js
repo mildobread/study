@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown, Row, Col } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
 import data from './data.js';
 import Comp from './component.js';
 
@@ -39,9 +39,9 @@ function App() {
       <Container>
         <Row>
           {
-            shoes.map(function(a, i){
+            shoes.map((element, i)=>{
               return (
-                <Comp index={i}></Comp>
+                <Comp shoes={shoes[i]} index={i}></Comp>
               )
             })
           }
