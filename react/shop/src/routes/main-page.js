@@ -1,11 +1,12 @@
 import { Col, Row, Container } from 'react-bootstrap';
 
+
 function MainPage(props) { // Component
   return (
     <Container>
       <Row>
         {props.shoes.map((shoe, i) => (
-          <Col>
+          <Col key={shoe.id}>
             <img src={"https://raw.githubusercontent.com/mildobread/study/main/react/shop/public/img/shoes" + (i + 1) + ".jpg"} width="80%"></img>
             <h4>{shoe.title}</h4>
             <p>{shoe.content}</p>
