@@ -10,19 +10,19 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 
 function App() {
 
-  let [shoes] = useState(data)
+  let [shoes, setShoes] = useState(data)
   let navigate = useNavigate(); // hook => 유용한 것들이 들어있는 함수같은거
 
   return (
     <div className="App">
       <Navbar expand="lg" className="navbar">
         <Container>
-          <Navbar.Brand href="#home" className="brand-text">Mildobread</Navbar.Brand>
+          <Navbar.Brand className="brand-text" onClick={()=>{ navigate('/') }}>Mildobread</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link onClick={()=>{ navigate('/') }}>Home</Nav.Link>
-              <Nav.Link onClick={()=>{ navigate('/detail') }}>Detail</Nav.Link>
+              <Nav.Link onClick={()=>{ navigate('/detail/0') }}>Detail</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -40,7 +40,7 @@ function App() {
       </Navbar>
 
       <Routes>
-        <Route path="/" element={<MainPage shoes={shoes}/>}/>
+        <Route path="/" element={<MainPage shoes={shoes} setShoes={setShoes}/>}/>
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
         <Route path="/about" element={<About/>}>
           <Route path="member" element={<div>멤버임</div>}/>
