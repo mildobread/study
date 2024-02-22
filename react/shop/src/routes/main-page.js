@@ -1,8 +1,28 @@
 import { Col, Row, Container } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 import axios from 'axios'
+import { click } from '@testing-library/user-event/dist/click';
+
+
+let click_count = 2;
 
 
 function MainPage(props) { // Component
+  let [more_button, set_more_button] = useState(true);
+  let [loading_txt, set_loading_txt] = useState("더보기");
+
+  useEffect(() => {
+    if (click_count === 4) {
+      set_more_button(false)
+    }
+  }, [click_count]) // }, [])는 Dependency
+
+  useEffect(() => {
+    if (click_count === 4) {
+      set_more_button(false)
+    }
+  }, [click_count]) // }, [])는 Dependency
+
   return (
     <Container>
       <Row>
@@ -15,17 +35,23 @@ function MainPage(props) { // Component
           </Col>
         ))}
       </Row>
-      <button onClick={() => {
-        axios.get('https://codingapple1.github.io/shop/data2.json')
-          .then((result) => {
-            let copy = [...props.shoes, ...result.data];
-            props.setShoes(copy);
-            console.log(result.data);
-          })
-          .catch(() => {
-            console.log('실패함ㅅㄱ')
-          })
-      }}>더보기</button>
+      {
+        more_button === true ?
+        <button onClick={() => {
+          set_loading_txt("로딩중");
+          axios.get("https://codingapple1.github.io/shop/data" + click_count + ".json")
+            .then((result) => {
+              let copy = [...props.shoes, ...result.data];
+              props.setShoes(copy);
+              console.log(result.data);
+              set_loading_txt("더보기");
+            })
+            .catch(() => {
+              set_loading_txt("더보기");
+            })
+            click_count += 1;
+        }}>{loading_txt}</button> : null
+      }
     </Container>
   )
 }

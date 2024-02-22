@@ -40,7 +40,7 @@ function Detail(props) { // Component
       <Row>
         <Col>
           <img src={"https://raw.githubusercontent.com/mildobread/study/main/react/shop/public/img/shoes" + (parseInt(id) + 1) + ".jpg"} width="80%" />
-          <input onChange={(e)=>{
+          <input style={{ display: "block", margin: "0 auto" }} onChange={(e)=>{
             setInput(e.target.value);
           }}/>
           <h4 className='pt-3'>{shoe.title}</h4>
