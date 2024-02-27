@@ -1,10 +1,16 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Context1 } from './../App.js';
 
 
 function Detail(props) { // Component
+
+  let { stock } = useContext(Context1) // 보관함 해체
+  // Context API 특징: 
+  // 1) state 변경시 쓸데없는 것까지(stock 안쓰는 것들) 재렌더링함. => 비효율적
+  // 2) 나중에 컴포넌트 재사용이 어려워짐 => 관리가 힘들어짐
 
   let [discount, setAlert] = useState(true);
   let [tab, setTab] = useState(0);
@@ -60,13 +66,14 @@ function Detail(props) { // Component
           <Nav.Link onClick={()=>setTab(2)} eventKey="버튼2">버튼2</Nav.Link>
         </Nav.Item>
       </Nav>
-      <TabContent tab={tab} />
+      <TabContent tab={tab}/>
     </Container>
   )
 }
 
 function TabContent({ tab }) {
 
+  let { stock } = useContext(Context1) // 보관함 해체 (detail 뿐만 아니라 그 자식들도 props 없이 사용할 수 있다.)
   let [fade, setFade] = useState('')
 
   useEffect(()=>{
@@ -80,7 +87,7 @@ function TabContent({ tab }) {
 
   return (<div className={"start " + fade}>
     {[
-      <div>내용0</div>,
+      <div>{stock[0]}</div>,
       <div>내용1</div>,
       <div>내용2</div>][tab]
     }

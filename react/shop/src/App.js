@@ -1,16 +1,21 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
+import { createContext, useState } from 'react';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import data from './data.js';
 import MainPage from './routes/main-page.js';
 import Detail from './routes/detail.js';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
+
+
+export let Context1 = createContext() // context를 하나 만들어줌: state 보관함
 
 
 function App() {
 
   let [shoes, setShoes] = useState(data)
+  let [stock] = useState([10, 11, 12])
+
   let navigate = useNavigate(); // hook => 유용한 것들이 들어있는 함수같은거
 
   return (
@@ -40,11 +45,15 @@ function App() {
       </Navbar>
 
       <Routes>
-        <Route path="/" element={<MainPage shoes={shoes} setShoes={setShoes}/>}/>
-        <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
-        <Route path="/about" element={<About/>}>
-          <Route path="member" element={<div>멤버임</div>}/>
-          <Route path="location" element={<div>위치정보임</div>}/>
+        <Route path="/" element={<MainPage shoes={shoes} setShoes={setShoes} />} />
+        <Route path="/detail/:id" element={
+            <Context1.Provider value={{ stock }}>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          } />
+        <Route path="/about" element={<About />}>
+          <Route path="member" element={<div>멤버임</div>} />
+          <Route path="location" element={<div>위치정보임</div>} />
         </Route>
         <Route path="*" element={<div>없는페이지요</div>}/>
       </Routes>
