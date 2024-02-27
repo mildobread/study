@@ -10,17 +10,27 @@ function Detail(props) { // Component
   let [tab, setTab] = useState(0);
   let { id } = useParams();
   let shoe = props.shoes.find(x => x.id === parseInt(id));
+  let [fade, setFade] = useState('')
 
   useEffect(() => {
-    let timer = setTimeout(() => { setAlert(false) }, 2000)
+    let timer = setTimeout(() => { setAlert(false) }, 2000);
 
     return ()=>{ // useEffect 동작 전에 실행되는 코드
-      clearTimeout(timer)
+      clearTimeout(timer);
     }
-  }) // }, [])는 Dependency
+  }, []) // }, [])는 Dependency
+
+  useEffect(()=>{
+    let fadeTimer = setTimeout(()=>{ setFade('end') }, 100);
+
+    return ()=>{
+      clearTimeout(fadeTimer);
+      setFade('');
+    }
+  }, []) // 빈 의존성 배열은 첫 렌더링 때만 실행. (아무것도 없으면 컴포넌트가 렌더링 될 때 마다 실행됨)
 
   return (
-    <Container>
+    <Container className={"start " + fade}>
       {
         discount === true
         ? <div className="alert alert-warning">
