@@ -1,11 +1,12 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import data from './data.js';
 import MainPage from './routes/main-page.js';
 import Detail from './routes/detail.js';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import Cart from './routes/cart.js'
+import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage shoes={shoes} setShoes={setShoes}/>}/>
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
+        <Route path="/cart" element={<Cart/>}></Route>
         <Route path="/about" element={<About/>}>
           <Route path="member" element={<div>멤버임</div>}/>
           <Route path="location" element={<div>위치정보임</div>}/>

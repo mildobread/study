@@ -1,21 +1,13 @@
 import { Col, Row, Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { click } from '@testing-library/user-event/dist/click';
-
-
-let click_count = 2;
 
 
 function MainPage(props) { // Component
+
+  let click_count = 2;
   let [more_button, set_more_button] = useState(true);
   let [loading_txt, set_loading_txt] = useState("더보기");
-
-  useEffect(() => {
-    if (click_count === 4) {
-      set_more_button(false)
-    }
-  }, [click_count]) // }, [])는 Dependency
 
   useEffect(() => {
     if (click_count === 4) {
@@ -28,7 +20,7 @@ function MainPage(props) { // Component
       <Row>
         {props.shoes.map((shoe, i) => (
           <Col key={i} className="col-md-4">
-            <img src={"https://raw.githubusercontent.com/mildobread/study/main/react/shop/public/img/shoes" + (i + 1) + ".jpg"} width="80%"></img>
+            <img src={"https://raw.githubusercontent.com/mildobread/study/main/react/shop/public/img/shoes" + (i + 1) + ".jpg"} width="80%" alt="shoe img"></img>
             <h4>{shoe.title}</h4>
             <p>{shoe.content}</p>
             <p>{shoe.price}</p>
