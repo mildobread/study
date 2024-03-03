@@ -1,10 +1,10 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import data from './data.js';
-import MainPage from './routes/main-page.js';
-import Detail from './routes/detail.js';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { useState } from 'react'
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import data from './data.js'
+import MainPage from './routes/main-page.js'
+import Detail from './routes/detail.js'
 import Cart from './routes/cart.js'
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 
